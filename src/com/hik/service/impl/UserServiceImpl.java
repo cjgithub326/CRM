@@ -42,4 +42,19 @@ public class UserServiceImpl implements UserService{
 		return userDao.getTotal(map);
 	}
 
+	@Override
+	public int save(User user) {
+		return userDao.save(user);
+	}
+
+	@Override
+	public int update(User user) {
+		return userDao.update(user);
+	}
+
+	@Override
+	public int delete(Integer id) {
+		return userDao.delete(id);
+	}
+
 }

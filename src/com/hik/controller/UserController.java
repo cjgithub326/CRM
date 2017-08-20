@@ -25,6 +25,7 @@ import com.hik.util.StringUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.processors.JsDateJsonBeanProcessor;
 
 /**
  * @ClassName: UserController
@@ -103,6 +104,69 @@ public class UserController {
 		}
 		result.put("rows", jsonArray);
 		result.put("total", total);
+		ResponseUtil.write(response, result);
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @MethodName: save
+	 * @Description: 添加或者修改用户
+	 * @author jed
+	 * @date 2017年8月19日下午9:32:19
+	 * @param @param user
+	 * @param @param response
+	 * @param @return    
+	 * @return String    返回类型
+	 * @param user
+	 * @param response
+	 * @return
+	 * @throws Exception 
+	 *
+	 */
+	@RequestMapping("/save")
+	public String save(User user,HttpServletResponse response) throws Exception{
+		long resultTotal=0L;
+		if(user.getId()==null){//添加
+			resultTotal = userService.save(user);
+		}else{//更新
+			resultTotal = userService.update(user);
+		}
+		JSONObject result = new JSONObject();
+		if(resultTotal>0){
+			result.put("success", true);
+		}else{
+			result.put("success", false); 
+		}
+		ResponseUtil.write(response, result); 
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @MethodName: delete
+	 * @Description: 删除用户
+	 * @author jed
+	 * @date 2017年8月19日下午10:56:44
+	 * @param @param ids
+	 * @param @param response
+	 * @param @return
+	 * @param @throws Exception    
+	 * @return String    返回类型
+	 * @param ids
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 *
+	 */
+	@RequestMapping("/delete")
+	public String delete(@RequestParam(value="ids")String ids,HttpServletResponse response) throws Exception{
+		String[] idsStr = ids.split(",");
+		for(int i=0;i<idsStr.length;i++){
+			userService.delete(Integer.parseInt(idsStr[i]));
+		}
+		JSONObject result = new JSONObject();
+		result.put("success", true);
 		ResponseUtil.write(response, result);
 		return null;
 	}

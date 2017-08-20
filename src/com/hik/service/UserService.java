@@ -58,4 +58,48 @@ public interface UserService {
 	 *
 	 */
 	public Long getTotal(Map<String, Object> map);
+	
+	/**
+	 * @MethodName: save
+	 * @Description: 添加用户
+	 * @author jed
+	 * @date 2017年8月19日下午6:19:47
+	 * @param @param user
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param user
+	 * @return
+	 *
+	 */
+	public int save(User user);
+	
+	/**
+	 * 
+	 * @MethodName: update
+	 * @Description: 修改用户
+	 * @author jed
+	 * @date 2017年8月19日下午6:19:59
+	 * @param @param user
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param user
+	 * @return
+	 *
+	 */
+	public int update(User user);
+	
+	/**
+	 *  
+	 * @MethodName: delete
+	 * @Description: 删除用户
+	 * @author jed
+	 * @date 2017年8月19日下午6:20:18
+	 * @param @param id
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param id
+	 * @return
+	 *
+	 */
+	public int delete(Integer id);
 }
