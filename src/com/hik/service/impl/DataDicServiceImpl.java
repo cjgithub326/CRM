@@ -42,4 +42,19 @@ public class DataDicServiceImpl implements DataDicService{
 		return datadicDao.findAll();
 	}
 
+	@Override
+	public int save(DataDic dataDic) {
+		return datadicDao.save(dataDic);
+	}
+
+	@Override
+	public int update(DataDic dataDic) {
+		return datadicDao.update(dataDic);
+	}
+
+	@Override
+	public int delete(Integer id) {
+		return datadicDao.delete(id);
+	}
+
 }

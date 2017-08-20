@@ -42,4 +42,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
+	<insert id="save" parameterType="DataDic" >
+		insert into t_datadic values(null,#{dataDicName},#{dataDicValue})
+	</insert>
+	
+	
+	<update id="update" parameterType="DataDic">
+		update t_datadic
+		<set>
+			<if test="dataDicName!=null and dataDicName!=''">
+				dataDicName=#{dataDicName},
+			</if>
+			<if test="dataDicValue!=null and dataDicValue!=''">
+				dataDicValue=#{dataDicValue},
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from t_datadic where id=#{id}
+	</delete>
 </mapper> 

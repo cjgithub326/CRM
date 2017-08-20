@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.hik.entity.DataDic;
+import com.hik.entity.User;
 
 /**
  * @ClassName: DataDicDao
@@ -58,5 +59,50 @@ public interface DataDicDao {
 	 *
 	 */
 	public Long getTotal(Map<String, Object> map);
+	
+	
+	/**
+	 * @MethodName: save
+	 * @Description: 添加数据字典
+	 * @author jed
+	 * @date 2017年8月19日下午6:19:47
+	 * @param @param dataDic
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param dataDic
+	 * @return
+	 *
+	 */
+	public int save(DataDic dataDic);
+	
+	/**
+	 * 
+	 * @MethodName: update
+	 * @Description: 修改数据字典
+	 * @author jed
+	 * @date 2017年8月19日下午6:19:59
+	 * @param @param dataDic
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param dataDic
+	 * @return
+	 *
+	 */
+	public int update(DataDic dataDic);
+	
+	/**
+	 *  
+	 * @MethodName: delete
+	 * @Description: 删除数据字典
+	 * @author jed
+	 * @date 2017年8月19日下午6:20:18
+	 * @param @param id
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param id
+	 * @return
+	 *
+	 */
+	public int delete(Integer id);
 	
 }

@@ -104,4 +104,67 @@ public class DataDicController {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @MethodName: save
+	 * @Description: 添加或者修改数据字典
+	 * @author jed
+	 * @date 2017年8月19日下午9:32:19
+	 * @param @param dataDic
+	 * @param @param response
+	 * @param @return    
+	 * @return String    返回类型
+	 * @param dataDic
+	 * @param response
+	 * @return
+	 * @throws Exception 
+	 *
+	 */
+	@RequestMapping("/save")
+	public String save(DataDic dataDic,HttpServletResponse response) throws Exception{
+		long resultTotal=0L;
+		if(dataDic.getId()==null){//添加
+			resultTotal = dataDicService.save(dataDic);
+		}else{//更新
+			resultTotal = dataDicService.update(dataDic);
+		}
+		JSONObject result = new JSONObject();
+		if(resultTotal>0){
+			result.put("success", true);
+		}else{
+			result.put("success", false); 
+		}
+		ResponseUtil.write(response, result); 
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @MethodName: delete
+	 * @Description: 删除数据字典
+	 * @author jed
+	 * @date 2017年8月19日下午10:56:44
+	 * @param @param ids
+	 * @param @param response
+	 * @param @return
+	 * @param @throws Exception    
+	 * @return String    返回类型
+	 * @param ids
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 *
+	 */
+	@RequestMapping("/delete")
+	public String delete(@RequestParam(value="ids")String ids,HttpServletResponse response) throws Exception{
+		String[] idsStr = ids.split(",");
+		for(int i=0;i<idsStr.length;i++){
+			dataDicService.delete(Integer.parseInt(idsStr[i]));
+		}
+		JSONObject result = new JSONObject();
+		result.put("success", true);
+		ResponseUtil.write(response, result);
+		return null;
+	}
+	
 }
