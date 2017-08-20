@@ -98,7 +98,7 @@ public class UserController {
 		List<User> userList = userService.find(map);
 		Long total = userService.getTotal(map);
 		JSONObject result = new JSONObject();
-		JSONArray jsonArray = null;
+		JSONArray jsonArray = new JSONArray();
 		if(CollectionUtil.isNotEmpty(userList)){
 			jsonArray = JSONArray.fromObject(userList);
 		}
