@@ -10,8 +10,23 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
 <script type="text/javascript">
 
+ var url;
+
+ $(function(){
+	 $("#assignMan").combobox({
+		 onSelect:function(record){
+			 if(record.trueName!=''){
+				 $("#assignTime").val(getCurrentDateTime());
+			 }else{
+				 $("#assignTime").val("");
+			 }
+		 }
+	 });
+ });
+ 
  function searchSaleChance(){
 	 $("#dg").datagrid('load',{
 		"customerName":$("#s_customerName").val().trim(),
@@ -28,6 +43,90 @@
 		 return "未分配 ";
 	 }
  }
+ 
+ function openSaleChanceAddDialog(){
+	 $("#dlg").dialog("open").dialog("setTitle","添加销售机会信息");
+	 $("#createMan").val('${currentUser.trueName}');
+	 $("#createTime").val(getCurrentDateTime());
+	 url="${pageContext.request.contextPath}/saleChance/save.do";
+ }
+ 
+ function openSaleChanceModifyDialog(){
+	 var selectedRows=$("#dg").datagrid("getSelections");
+	 if(selectedRows.length!=1){
+		 $.messager.alert("系统提示","请选择一条要编辑的数据！");
+		 return;
+	 }
+	 var row=selectedRows[0];
+	 $("#dlg").dialog("open").dialog("setTitle","编辑销售机会信息");
+	 $("#fm").form("load",row);
+	 url="${pageContext.request.contextPath}/saleChance/save.do?id="+row.id;
+ }
+ 
+ function saveSaleChance(){
+	 $("#fm").form("submit",{
+		url:url,
+		onSubmit:function(){
+			return $(this).form("validate");
+		},
+		success:function(result){
+			var result=eval('('+result+')');
+			if(result.success){
+				$.messager.alert("系统提示","保存成功！");
+				resetValue();
+				$("#dlg").dialog("close");
+				$("#dg").datagrid("reload");
+			}else{
+				$.messager.alert("系统提示","保存失败！");
+				return;
+			}
+		}
+	 });
+ }
+ 
+ function resetValue(){
+	 $("#customerName").val("");
+	 $("#chanceSource").val("");
+	 $("#linkMan").val("");
+	 $("#linkPhone").val("");
+	 $("#cgjl").numberbox('setValue',"");
+	 $("#overView").val("");
+	 $("#description").val("");
+	 $("#createMan").val("");
+	 $("#createTime").val("");
+	 $("#assignMan").combobox("setValue","");
+	 $("#assignTime").val("");
+ }
+ 
+ function closeSaleChanceDialog(){
+	 $("#dlg").dialog("close");
+	 resetValue();
+ }
+ 
+ function deleteSaleChance() {
+	 var selectedRows = $("#dg").datagrid("getSelections");
+	 if(selectedRows.length==0){
+		 $.messager.alert("系统提示","请选择要删除的数据！");
+		 return;
+	 }
+	 var strIds=[];
+	 for(var i=0;i<selectedRows.length;i++){
+		 strIds.push(selectedRows[i].id);
+	 }
+	 var ids= strIds.join(",");
+	 $.messager.confirm("系统提示","您确定要删除这<font color=red>"+selectedRows.length+"</font>条数据吗？",function(r){
+		 if(r){
+			 $.post("${pageContext.request.contextPath}/saleChance/delete.do",{ids:ids},function(result){
+				 if(result.success){
+					 $.messager.alert("系统提示","数据已成功删除！");
+					 $("#dg").datagrid("reload");
+				 }else{
+					 $.messager.alert("系统提示","数据删除失败，请联系系统管理员！");
+				 }
+			 },"json")
+		 }
+	 });
+}
  
 </script>
 <title>Insert title here</title>
@@ -58,6 +157,11 @@
  </table>
  <div id="tb">
  	<div>
+ 		<a href="javascript:openSaleChanceAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">创建</a>
+ 		<a href="javascript:openSaleChanceModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+ 		<a href="javascript:deleteSaleChance()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+ 	</div>
+ 	<div>
  		&nbsp;客户名称：&nbsp;<input type="text" id="s_customerName" size="20" onkeydown="if(event.keyCode==13) searchSaleChance()"/>
  		&nbsp;概要：&nbsp;<input type="text" id="s_overView" size="20" onkeydown="if(event.keyCode==13) searchSaleChance()"/>
  		&nbsp;创建人：&nbsp;<input type="text" id="s_createMan" size="20" onkeydown="if(event.keyCode==13) searchSaleChance()"/>
@@ -70,5 +174,61 @@
  	</div>
  </div>
  
+ <div id="dlg" class="easyui-dialog" style="width:700px;height:450px;padding: 10px 20px"
+   closed="true" buttons="#dlg-buttons">
+   
+   <form id="fm" method="post">
+   	<table cellspacing="8px">
+   		<tr>
+   			<td>客户名称：</td>
+   			<td><input type="text" id="customerName" name="customerName" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   			<td>机会来源</td>
+   			<td><input type="text" id="chanceSource" name="chanceSource" /></td>
+   		</tr>
+   		<tr>
+   			<td>联系人：</td>
+   			<td><input type="text" id="linkMan" name="linkMan" /></td>
+   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   			<td>联系电话：</td>
+   			<td><input type="text" id="linkPhone" name="linkPhone" /></td>
+   		</tr>
+   		<tr>
+   			<td>成功几率(%)：</td>
+   			<td><input type="text" id="cgjl" name="cgjl" class="easyui-numberbox" data-options="min:0,max:100" required="true"/>&nbsp;<font color="red">*</font></td>
+   			<td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   		</tr>
+   		<tr>
+   			<td>概要：</td>
+   			<td colspan="4"><input type="text" id="overView" name="overView" style="width: 420px"/></td>
+   		</tr>
+   		<tr>
+   			<td>机会描述：</td>
+   			<td colspan="4">
+   				<textarea rows="5" cols="50" id="description" name="description"></textarea>
+   			</td>
+   		</tr>
+   		<tr>
+   			<td>创建人：</td>
+   			<td><input type="text" id="createMan" name="createMan" readonly="readonly" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   			<td>创建时间：</td>
+   			<td><input type="text" id="createTime" name="createTime"  readonly="readonly"/>&nbsp;<font color="red">*</font></td>
+   		</tr>
+   		<tr>
+   			<td>指派给：</td>
+   			<td><input class="easyui-combobox" id="assignMan" name="assignMan" data-options="panelHeight:'auto',editable:false,valueField:'trueName',textField:'trueName',url:'${pageContext.request.contextPath}/user/customerManagerComboList.do'"/></td>
+   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   			<td>指派时间：</td>
+   			<td><input type="text" id="assignTime" name="assignTime" readonly="readonly"/></td>
+   		</tr>
+   	</table>
+   </form>
+ </div>
+ 
+ <div id="dlg-buttons">
+ 	<a href="javascript:saveSaleChance()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+ 	<a href="javascript:closeSaleChanceDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+ </div>
 </body>
 </html>

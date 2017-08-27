@@ -46,4 +46,49 @@ public interface SaleChanceDao {
 	 */
 	public Long getTotal(Map<String, Object> map);
 	
+	/**
+	 * 
+	 * @MethodName: save
+	 * @Description: 添加销售机会
+	 * @author jed
+	 * @date 2017年8月27日上午10:05:36
+	 * @param @param saleChance
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param saleChance
+	 * @return
+	 *
+	 */
+	public int save(SaleChance saleChance);
+	
+	/**
+	 * 
+	 * @MethodName: update
+	 * @Description: 修改销售机会 
+	 * @author jed
+	 * @date 2017年8月27日下午4:26:13
+	 * @param @param saleChance
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param saleChance
+	 * @return
+	 *
+	 */
+	public int update(SaleChance saleChance);
+	
+	/**
+	 * 
+	 * @MethodName: delete
+	 * @Description: 删除销售机会
+	 * @author jed
+	 * @date 2017年8月27日下午4:26:46
+	 * @param @param id
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param id
+	 * @return
+	 *
+	 */
+	public int delete(Integer id);
+	
 }

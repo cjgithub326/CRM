@@ -36,5 +36,20 @@ public class SaleChanceServiceImpl implements SaleChanceService{
 	public Long getTotal(Map<String, Object> map) {
 		return saleChanceDao.getTotal(map);
 	}
+	
+	@Override
+	public int save(SaleChance saleChance) {
+		return saleChanceDao.save(saleChance);
+	}
+
+	@Override
+	public int update(SaleChance saleChance) {
+		return saleChanceDao.update(saleChance);
+	}
+
+	@Override
+	public int delete(Integer id) {
+		return saleChanceDao.delete(id);
+	}
 
 }

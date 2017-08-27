@@ -61,4 +61,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
+	<insert id="save" parameterType="SaleChance">
+		insert into t_sale_chance values(null,#{chanceSource},#{customerName},#{cgjl},#{overView},#{linkMan},#{linkPhone},#{linkPhone},#{createMan},#{createTime},#{assignMan},#{assignTime},#{state},#{devResult});
+	</insert>
+	
+	<update id="update" parameterType="SaleChance">
+		update t_sale_chance
+		<set>
+			<if test="chanceSource!=null and chanceSource!=''">
+				chanceSource = #{chanceSource},
+			</if>
+			<if test="customerName!=null and customerName!=''">
+				customerName = #{customerName},
+			</if>
+			<if test="cgjl!=null">
+				cgjl = #{cgjl},
+			</if>
+			<if test="overView!=null and overView!=''">
+				overView = #{overView},
+			</if>
+			<if test="linkMan!=null and linkMan!=''">
+				linkMan = #{linkMan},
+			</if>
+			<if test="linkPhone!=null and linkPhone!=''">
+				linkPhone = #{linkPhone},
+			</if>
+			<if test="description!=null and description!=''">
+				description = #{description},
+			</if>
+			<if test="createTime!=null">
+				createTime = #{createTime},
+			</if>
+			<if test="assignMan!=null and assignMan!=''">
+				assignMan = #{assignMan},
+			</if>
+			<if test="assignTime!=null ">
+				assignTime = #{assignTime},
+			</if>
+			<if test="state!=null">
+				state = #{state},
+			</if>
+			<if test="devResult!=null and devResult!=''">
+				devResult = #{devResult},
+			</if>
+		</set>
+			where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from t_sale_chance where id=#{id}
+	</delete>
 </mapper> 

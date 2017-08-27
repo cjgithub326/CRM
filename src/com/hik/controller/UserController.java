@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hik.entity.PageBean;
+import com.hik.entity.SaleChance;
 import com.hik.entity.User;
 import com.hik.service.UserService;
 import com.hik.util.CollectionUtil;
@@ -136,7 +137,7 @@ public class UserController {
 		if(resultTotal>0){
 			result.put("success", true);
 		}else{
-			result.put("success", false); 
+			result.put("success", false);
 		}
 		ResponseUtil.write(response, result); 
 		return null;
@@ -170,4 +171,30 @@ public class UserController {
 		ResponseUtil.write(response, result);
 		return null;
 	}
+	
+	/**
+	 * 
+	 * @MethodName: customerManagerComboList
+	 * @Description: 获取客户经理信息 下拉框数据用到
+	 * @author jed
+	 * @date 2017年8月27日上午10:47:02
+	 * @param @param response
+	 * @param @return
+	 * @param @throws Exception    
+	 * @return String    返回类型
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 *
+	 */
+	@RequestMapping("/customerManagerComboList")
+	public String customerManagerComboList(HttpServletResponse response) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("roleName", "客户经理");
+		List<User> userList= userService.find(map);
+		JSONArray row = JSONArray.fromObject(userList);
+		ResponseUtil.write(response, row);
+		return null;
+	}
+	
 }
