@@ -78,6 +78,7 @@ public class SaleChanceController {
 		map.put("overView", StringUtil.formatLike(saleChance.getOverView()));
 		map.put("createMan", StringUtil.formatLike(saleChance.getCreateMan()));
 		map.put("state", saleChance.getState());
+		map.put("devResult", saleChance.getDevResult());
 		map.put("start", pageBean.getStart());
 		map.put("size", pageBean.getPageSize());
 		List<SaleChance> saleChanceList = saleChanceService.find(map);

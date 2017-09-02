@@ -37,6 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="state!=null">
 				and state = #{state}
 			</if>
+			<if test="devResult!=null">
+				and devResult = #{devResult}
+			</if>
 		</where>
 		<if test="start!=null and size!=null">
 			limit #{start},#{size}
@@ -57,6 +60,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="state!=null">
 				and state = #{state}
+			</if>
+			<if test="devResult!=null">
+				and devResult = #{devResult}
 			</if>
 		</where>
 	</select>
