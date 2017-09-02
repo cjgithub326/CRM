@@ -10,6 +10,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/jquery.edatagrid.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
 <script type="text/javascript">
  
@@ -30,7 +31,24 @@
 		 $("#assignTime").val(result.assignTime);
 		},"json");
 	 
+	 $("#dg").edatagrid({
+		 url:'${pageContext.request.contextPath}/cusDevPlan/list.do?saleChanceId=${param.saleChanceId}',
+		 saveUrl:'${pageContext.request.contextPath}/cusDevPlan/save.do?saleChance.id=${param.saleChanceId}',
+		 updateUrl:'${pageContext.request.contextPath}/cusDevPlan/save.do?saleChance.id=${param.saleChanceId}',
+		 destroyUrl:'${pageContext.request.contextPath}/cusDevPlan/delete.do'
+	 });
+	 
  });
+  
+  function updateSaleChanceDevResult(devResult){
+	  $.post("${pageContext.request.contextPath}/cusDevPlan/updateSaleChanceDevResult.do",{id:'${param.saleChanceId}',devResult:devResult},function(result){
+			 if(result.success){
+				 $.messager.alert("系统提示","执行成功！");
+			 }else{
+				 $.messager.alert("系统提示","执行失败！");
+			 }
+		 },"json");
+  }
  
 </script>
 <title>Insert title here</title>
@@ -84,7 +102,28 @@
    			<td>指派时间：</td>
    			<td><input type="text" id="assignTime" name="assignTime" readonly="readonly"/></td>
    		</tr>
+   	</table>
  </div>
  
+ </br>
+ 	<table id="dg" title="开发计划项" style="width: 700px;height: 250px" toolbar="#toolbar" idField="id" rownumbers="true" fitColumns="true" singleSelect="true" >
+ 		<thead>
+ 			<tr>
+ 				<th field="id" width="50">编号</th>
+ 				<th field="planDate" width="50" editor="{type:'datebox',options:{required:true}}">日期</th>
+ 				<th field="planItem" width="100" editor="{type:'validatebox',options:{required:true}}">计划内容</th>
+ 				<th field="exeAffect" width="100" editor="{type:'validatebox',options:{required:true}}">执行效果</th>
+ 			</tr>
+ 		</thead>
+ 	</table>
+ 	
+ 	<div id="toolbar">
+ 		<a href="javaScript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg').edatagrid('addRow')">添加计划</a>
+ 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">删除计划</a>
+ 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow');$('#dg').edatagrid('reload')">保存计划</a>
+ 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">撤销行</a>
+ 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-kfcg" plain="true" onclick="updateSaleChanceDevResult(2)">开发成功</a>
+ 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-zzkf" plain="true" onclick="updateSaleChanceDevResult(3)">终止开发</a>
+ 	</div>
 </body>
 </html>

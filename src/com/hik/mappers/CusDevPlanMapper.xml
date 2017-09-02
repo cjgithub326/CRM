@@ -12,4 +12,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<association property="saleChance" column="saleChanceId" select="com.hik.dao.SaleChanceDao.findById"></association>
 	</resultMap>
 	
+	<select id="find" parameterType="Map" resultMap="CusDevPlanResult">
+		select * from t_cus_dev_plan
+		<where>
+			<if test="saleChanceId!=null and saleChanceId!=''">
+				and saleChanceId = #{saleChanceId}
+			</if>
+		</where>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+	
+	<select id="getTotal" parameterType="Map" resultType="Long">
+		select count(*) from t_datadic
+		<where>
+			<if test="saleChanceId!=null and saleChanceId!=''">
+				and saleChanceId = #{saleChanceId}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="save" parameterType="CusDevPlan" >
+		insert into t_cus_dev_plan values(null,#{saleChance.id},#{planItem},#{planDate},#{exeAffect})
+	</insert>
+	
+	
+	<update id="update" parameterType="CusDevPlan">
+		update t_cus_dev_plan
+		<set>
+			<if test="planItem!=null and planItem!='' ">
+				planItem=#{planItem},
+			</if>
+			<if test="planDate!=null">
+				planDate=#{planDate},
+			</if>
+			<if test="exeAffect!=null and exeAffect!='' ">
+				exeAffect=#{exeAffect},
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from t_cus_dev_plan where id=#{id}
+	</delete>
+	
 </mapper> 

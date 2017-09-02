@@ -22,13 +22,11 @@
  }
  
  function openDataDicAddDialog(){
-	 debugger
 	 $("#dlg").dialog("open").dialog("setTitle","添加数据字典信息");
 	 url="${pageContext.request.contextPath}/dataDic/save.do";
  }
  
  function openDataDicModifyDialog() {
-	 debugger
 	 var selectedRows = $("#dg").datagrid("getSelections");
 	 if(selectedRows.length!=1){
 		 $.messager.alert("系统提示","请选择一条要编辑的数据！");
@@ -42,7 +40,6 @@
 }
  
  function saveDataDic() {
-	 debugger
 	var dataDicName = $("#dataDicName").combobox("getText");
 	if(dataDicName==""){
 		$.messager.alert("系统提示","数据字典值不能为空 ！");
