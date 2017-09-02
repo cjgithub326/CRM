@@ -165,4 +165,31 @@ public class SaleChanceController {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @MethodName: findById
+	 * @Description: 根据id查询销售机会
+	 * @author jed
+	 * @date 2017年9月2日上午10:02:27
+	 * @param @param id
+	 * @param @param response
+	 * @param @return
+	 * @param @throws Exception    
+	 * @return String    返回类型
+	 * @param id
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 *
+	 */
+	@RequestMapping("/findById")
+	public String findById(@RequestParam(value="id")String id,HttpServletResponse response) throws Exception{
+		SaleChance saleChance = saleChanceService.findById(Integer.parseInt(id));
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd HH:mm"));
+		JSONObject result = JSONObject.fromObject(saleChance,jsonConfig);
+		ResponseUtil.write(response, result);
+		return null;
+	}
+	
 }

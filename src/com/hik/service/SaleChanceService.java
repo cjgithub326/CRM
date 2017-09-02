@@ -89,4 +89,19 @@ public interface SaleChanceService {
 	 *
 	 */
 	public int delete(Integer id);
+	
+	/**
+	 * 
+	 * @MethodName: findById
+	 * @Description: 根据id查找销售机会
+	 * @author jed
+	 * @date 2017年9月2日上午9:15:32
+	 * @param @param id
+	 * @param @return    
+	 * @return SaleChance    返回类型
+	 * @param id
+	 * @return
+	 *
+	 */
+	public SaleChance findById(Integer id);
 }

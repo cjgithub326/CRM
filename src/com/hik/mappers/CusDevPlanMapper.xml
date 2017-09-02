@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hik.dao.CusDevPlanDao">
+
+	<resultMap type="CusDevPlan" id="CusDevPlanResult">
+		<result property="id" column="id"/>
+		<result property="planItem" column="planItem"/>
+		<result property="planDate" column="planDate"/>
+		<result property="exeAffect" column="exeAffect"/>
+		<association property="saleChance" column="saleChanceId" select="com.hik.dao.SaleChanceDao.findById"></association>
+	</resultMap>
+	
+</mapper> 

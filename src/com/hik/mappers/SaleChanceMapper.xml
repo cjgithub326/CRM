@@ -117,4 +117,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="Integer">
 		delete from t_sale_chance where id=#{id}
 	</delete>
+	
+	<select id="findById" parameterType="Integer" resultMap="SaleChanceResult">
+		select * from t_sale_chance where id=#{id}
+	</select>
 </mapper> 

@@ -52,4 +52,9 @@ public class SaleChanceServiceImpl implements SaleChanceService{
 		return saleChanceDao.delete(id);
 	}
 
+	@Override
+	public SaleChance findById(Integer id) {
+		return saleChanceDao.findById(id);
+	}
+
 }
