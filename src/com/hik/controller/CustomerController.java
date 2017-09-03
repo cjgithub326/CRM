@@ -102,6 +102,8 @@ public class CustomerController {
 		if(customer.getId()==null){//添加
 			customer.setKhno("KH"+DateUtil.getCurrentDateStr()); // 动态生成客户编号
 			resultTotal = customerService.save(customer);
+		}else{
+			resultTotal = customerService.update(customer);
 		}
 		JSONObject result = new JSONObject();
 		if(resultTotal>0){
@@ -109,6 +111,34 @@ public class CustomerController {
 		}else{
 			result.put("success", false);
 		}
+		ResponseUtil.write(response, result);
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @MethodName: delete
+	 * @Description: 删除客户信息
+	 * @author jed
+	 * @date 2017年9月3日下午12:27:39
+	 * @param @param ids
+	 * @param @param response
+	 * @param @return    
+	 * @return String    返回类型
+	 * @param ids
+	 * @param response
+	 * @return
+	 * @throws Exception 
+	 *
+	 */
+	@RequestMapping("/delete")
+	public String delete(@RequestParam(value="ids")String ids,HttpServletResponse response) throws Exception{
+		String [] idsStr = ids.split(",");
+		for(int i=0;i<idsStr.length;i++){
+			customerService.delete(Integer.parseInt(idsStr[i]));
+		}
+		JSONObject result = new JSONObject();
+		result.put("success", true);
 		ResponseUtil.write(response, result);
 		return null;
 	}

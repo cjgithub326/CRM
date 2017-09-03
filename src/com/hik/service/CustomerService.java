@@ -61,5 +61,35 @@ public interface CustomerService {
 	 *
 	 */
 	public int save(Customer customer);
+	
+	/**
+	 * 
+	 * @MethodName: update
+	 * @Description: 修改客户相信
+	 * @author jed
+	 * @date 2017年9月3日下午12:21:22
+	 * @param @param customer
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param customer
+	 * @return
+	 *
+	 */
+	public int update(Customer customer);
+	
+	/**
+	 * 
+	 * @MethodName: delete
+	 * @Description: 删除客户信息
+	 * @author jed
+	 * @date 2017年9月3日下午12:21:35
+	 * @param @param Integer
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param customer
+	 * @return
+	 *
+	 */
+	public int delete(Integer id);
 
 }
