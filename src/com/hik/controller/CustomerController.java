@@ -143,4 +143,24 @@ public class CustomerController {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @MethodName: findById
+	 * @Description: 通过id获取实体
+	 * @author jed
+	 * @date 2017年9月3日下午5:40:04
+	 * @param @return    
+	 * @return String    返回类型
+	 * @return
+	 * @throws Exception 
+	 *
+	 */
+	@RequestMapping("/findById")
+	public String findById(@RequestParam(value="id")String id,HttpServletResponse response) throws Exception{
+		Customer customer = customerService.findById(Integer.parseInt(id));
+		JSONObject result = JSONObject.fromObject(customer);
+		ResponseUtil.write(response, result);
+		return null;
+	}
+	
 }

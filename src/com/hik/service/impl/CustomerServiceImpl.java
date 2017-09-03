@@ -52,4 +52,9 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerDao.delete(id);
 	}
 
+	@Override
+	public Customer findById(Integer id) {
+		return customerDao.findById(id);
+	}
+
 }

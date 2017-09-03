@@ -89,4 +89,19 @@ public interface CustomerDao {
 	 *
 	 */
 	public int delete(Integer id);
+	
+	/**
+	 * 
+	 * @MethodName: findById
+	 * @Description: 根据id获取客户实体
+	 * @author jed
+	 * @date 2017年9月3日下午5:31:01
+	 * @param @param id
+	 * @param @return    
+	 * @return Customer    返回类型
+	 * @param id
+	 * @return
+	 *
+	 */
+	public Customer findById(Integer id);
 }

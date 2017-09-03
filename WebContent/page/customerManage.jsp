@@ -131,6 +131,15 @@ function deleteCustomer(){
 		} 
 	 });
 }
+
+function openCustomerLinkMan(){
+	var selectedRows=$("#dg").datagrid("getSelections");
+	 if(selectedRows.length!=1){
+		 $.messager.alert("系统提示","请选择一条要管理的数据！");
+		 return;
+	 }
+	 window.parent.openTab('客户联系人管理','linkManManage.jsp?cusId='+selectedRows[0].id,'icon-lxr');
+}
  
 </script>
 <title>Insert title here</title>
@@ -175,6 +184,7 @@ function deleteCustomer(){
  		<a href="javascript:openCustomerAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">创建</a>
  		<a href="javascript:openCustomerModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
  		<a href="javascript:deleteCustomer()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+ 		<a href="javascript:openCustomerLinkMan()" class="easyui-linkbutton" iconCls="icon-lxr" plain="true">联系人管理</a>
  	</div>
  	<div>
  		&nbsp;客户编号：&nbsp;<input type="text" id="s_khno" size="20" onkeydown="if(event.keyCode==13) searchCustomer()"/>
