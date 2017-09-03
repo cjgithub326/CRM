@@ -20,6 +20,7 @@ import com.hik.service.DataDicService;
 import com.hik.util.CollectionUtil;
 import com.hik.util.ResponseUtil;
 import com.hik.util.StringUtil;
+import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -97,6 +98,35 @@ public class DataDicController {
 	public String dataDicNameComboList(HttpServletResponse response) throws Exception{
 		JSONArray jsonArray = new JSONArray();
 		List<DataDic> dataDicList = dataDicService.findAll();
+		if(CollectionUtil.isNotEmpty(dataDicList)){
+			jsonArray = JSONArray.fromObject(dataDicList);
+		}
+		ResponseUtil.write(response, jsonArray);
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @MethodName: dataDicComboList
+	 * @Description: 根据数据字典名称查找，用户下拉框
+	 * @author jed
+	 * @date 2017年9月3日上午11:05:01
+	 * @param @param dataName
+	 * @param @param response
+	 * @param @return    
+	 * @return String    返回类型
+	 * @param dataName
+	 * @param response
+	 * @return
+	 * @throws Exception 
+	 *
+	 */
+	@RequestMapping("/dataDicComboList")
+	public String dataDicComboList(@RequestParam(value="dataDicName")String dataDicName,HttpServletResponse response) throws Exception{
+		JSONArray jsonArray = new JSONArray();
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("dataDicName", dataDicName);
+		List<DataDic> dataDicList = dataDicService.find(map);
 		if(CollectionUtil.isNotEmpty(dataDicList)){
 			jsonArray = JSONArray.fromObject(dataDicList);
 		}

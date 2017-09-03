@@ -46,5 +46,20 @@ public interface CustomerService {
 	 *
 	 */
 	public Long getTotal(Map<String, Object> map);
+	
+	/**
+	 * 
+	 * @MethodName: save
+	 * @Description: 保存客户信息
+	 * @author jed
+	 * @date 2017年9月3日上午10:41:15
+	 * @param @param customer
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param customer
+	 * @return
+	 *
+	 */
+	public int save(Customer customer);
 
 }

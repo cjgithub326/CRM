@@ -18,12 +18,12 @@ import com.hik.entity.PageBean;
 import com.hik.entity.Customer;
 import com.hik.service.CustomerService;
 import com.hik.util.CollectionUtil;
+import com.hik.util.DateUtil;
 import com.hik.util.ResponseUtil;
 import com.hik.util.StringUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.processors.JsDateJsonBeanProcessor;
 
 /**
  * @ClassName: CustomerController
@@ -76,6 +76,39 @@ public class CustomerController {
 		}
 		result.put("rows", jsonArray);
 		result.put("total", total);
+		ResponseUtil.write(response, result);
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @MethodName: save
+	 * @Description: 添加用户
+	 * @author jed
+	 * @date 2017年9月3日上午10:46:43
+	 * @param @param customer
+	 * @param @param response
+	 * @param @return    
+	 * @return String    返回类型
+	 * @param customer
+	 * @param response
+	 * @return
+	 * @throws Exception 
+	 *
+	 */
+	@RequestMapping("/save")
+	public String save(Customer customer,HttpServletResponse response) throws Exception{
+		long resultTotal=0L;
+		if(customer.getId()==null){//添加
+			customer.setKhno("KH"+DateUtil.getCurrentDateStr()); // 动态生成客户编号
+			resultTotal = customerService.save(customer);
+		}
+		JSONObject result = new JSONObject();
+		if(resultTotal>0){
+			result.put("success", true);
+		}else{
+			result.put("success", false);
+		}
 		ResponseUtil.write(response, result);
 		return null;
 	}

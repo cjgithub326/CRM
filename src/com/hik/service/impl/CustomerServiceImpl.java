@@ -37,4 +37,9 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerDao.getTotal(map);
 	}
 
+	@Override
+	public int save(Customer customer) {
+		return customerDao.save(customer);
+	}
+
 }
