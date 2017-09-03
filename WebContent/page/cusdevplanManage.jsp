@@ -47,11 +47,15 @@
 	 window.parent.openTab('客户开发计划项管理','cusdevplanitemManage.jsp?saleChanceId='+id,'icon-khkfjh');
  }
  
+ function openCusDevPlanTab2(id){
+	 window.parent.openTab('查看客户开发计划项','cusdevplanitemManage.jsp?saleChanceId='+id+'&show=true','icon-khkfjh');
+ }
+ 
  function formatAction(val,row){
 	 if(row.devResult==0||row.devResult==1){
 		 return "<a href='javaScript:openCusDevPlanTab("+row.id+")'>开发</a>";
 	 }else{
-		 return "<a href=''>查看详细信息</a>";
+		 return "<a href='javaScript:openCusDevPlanTab2("+row.id+")'>查看详细信息</a>";
 	 }
  }
  
