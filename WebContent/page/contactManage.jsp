@@ -23,11 +23,11 @@
 		},"json");
 	 
 	 $("#dg").edatagrid({
-		url:'${pageContext.request.contextPath}/linkMan/list.do?cusId=${param.cusId}',
-		saveUrl:'${pageContext.request.contextPath}/linkMan/save.do?customer.id=${param.cusId}',
-		updateUrl:'${pageContext.request.contextPath}/linkMan/save.do',
-		destroyUrl:'${pageContext.request.contextPath}/linkMan/delete.do'
-	 });
+			url:'${pageContext.request.contextPath}/contact/list.do?cusId=${param.cusId}',
+			saveUrl:'${pageContext.request.contextPath}/contact/save.do?customer.id=${param.cusId}',
+			updateUrl:'${pageContext.request.contextPath}/contact/save.do',
+			destroyUrl:'${pageContext.request.contextPath}/contact/delete.do'
+		 });
  });
  
  
@@ -50,24 +50,14 @@
  </div>
  
  <br/>
- <table id="dg" title="联系人信息管理" style="width:700px;height:250px"
+ <table id="dg" title="交往记录信息管理" style="width:700px;height:250px"
    toolbar="#toolbar" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
    <thead>
    	<tr>
    		<th field="id" width="50">编号</th>
-   		<th field="linkName" width="100" editor="{type:'validatebox',options:{required:true}}">客户姓名</th>
-   		<th field="sex" width="50" editor="{type:'combobox',
-   			options:{
-   				valueField:'id',
-   				textField:'name',
-   				data:[{id:'男',name:'男'},{id:'女',name:'女'}],
-   				required:true,
-   				editable:false,
-   				panelHeight:'auto'
-   		    }}">性别</th>
-   		<th field="zhiwei" width="100" editor="{type:'validatebox',options:{required:true}}">职位</th>
-   		<th field="officePhone" width="100" editor="{type:'validatebox',options:{required:true}}">办公电话</th>
-   		<th field="phone" width="100" editor="{type:'validatebox',options:{required:true}}">手机</th>
+   		<th field="contactTime" width="100" editor="{type:'datebox',options:{required:true}}">交往时间</th>
+   		<th field="address" width="200" editor="{type:'validatebox',options:{required:true}}">交往地址</th>
+   		<th field="overView" width="300" editor="{type:'validatebox',options:{required:true}}">概要</th>
    	</tr>
    </thead>
  </table>
