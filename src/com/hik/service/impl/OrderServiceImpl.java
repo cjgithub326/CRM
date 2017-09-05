@@ -21,20 +21,25 @@ import com.hik.service.OrderService;
  * @date 2017年9月5日下午8:43:46
  *
  */
-@Service("/orderService")
+@Service("orderService")
 public class OrderServiceImpl implements OrderService{
 
 	@Resource
-	private OrderDao orderdao;
+	private OrderDao orderDao;
 	
 	@Override
 	public List<Order> find(Map<String, Object> map) {
-		return orderdao.find(map);
+		return orderDao.find(map);
 	}
 
 	@Override
 	public Long getTotal(Map<String, Object> map) {
-		return orderdao.getTotal(map);
+		return orderDao.getTotal(map);
+	}
+
+	@Override
+	public Order findById(Integer id) {
+		return orderDao.findById(id);
 	}
 
 }
