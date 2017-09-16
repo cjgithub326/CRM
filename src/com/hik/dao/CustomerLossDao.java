@@ -6,6 +6,8 @@ package com.hik.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.authenticator.SavedRequest;
+
 import com.hik.entity.CustomerLoss;
 
 /**
@@ -47,6 +49,19 @@ public interface CustomerLossDao {
 	 */
 	public Long getTotal(Map<String, Object> map);
 	
-	
+	/**
+	 * 
+	 * @MethodName: saveCustomerLoss
+	 * @Description: 添加流失客户
+	 * @author jed
+	 * @date 2017年9月10日下午11:14:55
+	 * @param @param customerLoss
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param customerLoss
+	 * @return
+	 *
+	 */
+	public int saveCustomerLoss(CustomerLoss customerLoss);
 	
 }

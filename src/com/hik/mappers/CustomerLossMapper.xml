@@ -48,5 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
+	<insert id="saveCustomerLoss" parameterType="CustomerLoss" >
+		insert into t_customer_loss values(null,#{cusNo},#{cusName},#{cusManager},#{lastOrderTime},null,0,null);
+	</insert>
 	
 </mapper> 

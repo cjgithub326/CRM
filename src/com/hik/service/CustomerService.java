@@ -106,5 +106,17 @@ public interface CustomerService {
 	 *
 	 */
 	public Customer findById(Integer id);
+	
+	/**
+	 * 
+	 * @MethodName: checkCustomerLoss
+	 * @Description: 查找流失客户，并且添加到流失客户表里
+	 * @author jed
+	 * @date 2017年9月10日下午11:49:40
+	 * @param     
+	 * @return void    返回类型
+	 *
+	 */
+	public void checkCustomerLoss();
 
 }

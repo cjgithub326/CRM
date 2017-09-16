@@ -104,4 +104,17 @@ public interface CustomerDao {
 	 *
 	 */
 	public Customer findById(Integer id);
+	
+	/**
+	 * 
+	 * @MethodName: findCustomerLoss
+	 * @Description: 查找流失的客户 6个月未下单的客户
+	 * @author jed
+	 * @date 2017年9月10日下午11:45:01
+	 * @param @return    
+	 * @return List<Customer>    返回类型
+	 * @return
+	 *
+	 */
+	public List<Customer> findCustomerLoss();
 }

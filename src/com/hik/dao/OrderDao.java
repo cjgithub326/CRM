@@ -62,4 +62,19 @@ public interface OrderDao {
 	 */
 	public Order findById(Integer id);
 	
+	/**
+	 * 
+	 * @MethodName: findLastOrderByCusId
+	 * @Description: 查找指定客户最近订单
+	 * @author jed
+	 * @date 2017年9月10日下午11:59:20
+	 * @param @param cusId
+	 * @param @return    
+	 * @return Order    返回类型
+	 * @param cusId
+	 * @return
+	 *
+	 */
+	public Order findLastOrderByCusId(Integer cusId);
+	
 }
