@@ -37,4 +37,14 @@ public class CustomerLossServiceImpl implements CustomerLossService{
 		return customerLossDao.getTotal(map);
 	}
 
+	@Override
+	public CustomerLoss findById(Integer id) {
+		return customerLossDao.findById(id);
+	}
+
+	@Override
+	public int update(CustomerLoss customerLoss) {
+		return customerLossDao.update(customerLoss);
+	}
+
 }

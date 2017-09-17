@@ -29,6 +29,18 @@
 	 }
  }
  
+ function formatAction(val,row) {
+	if(row.state==1){
+		return "客户确认流失";
+	}else{
+		return "<a href='javascript:openCustomerReprieve("+row.id+")'>暂缓流失</a>";
+	}
+}
+ 
+ function openCustomerReprieve(id){
+	 window.parent.openTab("客户流失暂缓措施管理",'customerReprieveManage.jsp?lossId='+id,'icon-khlsgl');
+ }
+ 
 </script>
 <title>Insert title here</title>
 </head>
@@ -47,6 +59,7 @@
    		<th field="confirmLossTime" width="100" align="center">确认流失日期</th>
    		<th field="state" width="80" align="center" formatter="formatState">客户状态</th>
    		<th field="lossReason" width="200" align="center">流失原因</th>
+   		<th field="a" width="100" align="center" formatter="formatAction">操作</th>
    	</tr>
    </thead>
  </table>

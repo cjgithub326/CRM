@@ -3,6 +3,7 @@
  */
 package com.hik.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +80,66 @@ public class CustomerLossController {
 		}
 		result.put("rows", jsonArray);
 		result.put("total", total);
+		ResponseUtil.write(response, result);
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @MethodName: findById
+	 * @Description: 通过id查找客户流失
+	 * @author jed
+	 * @date 2017年9月17日上午10:38:06
+	 * @param @param id
+	 * @param @param response
+	 * @param @return
+	 * @param @throws Exception    
+	 * @return String    返回类型
+	 * @param id
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 *
+	 */
+	@RequestMapping("/findById")
+	public String findById(@RequestParam(value="id")String id,HttpServletResponse response) throws Exception{
+		CustomerLoss customerLoss = customerLossService.findById(Integer.parseInt(id));
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));
+		JSONObject result= JSONObject.fromObject(customerLoss, jsonConfig);
+		ResponseUtil.write(response, result);
+		return null;
+		
+	}
+	
+	/**
+	 * 
+	 * @MethodName: confirmLoss
+	 * @Description: 确认客户流失
+	 * @author jed
+	 * @date 2017年9月17日上午10:41:07
+	 * @param @param id
+	 * @param @param lossReason
+	 * @param @param response
+	 * @param @return    
+	 * @return String    返回类型
+	 * @param id
+	 * @param lossReason
+	 * @param response
+	 * @return
+	 * @throws Exception 
+	 *
+	 */
+	@RequestMapping("/confirmLoss")
+	public String confirmLoss(String id,String lossReason,HttpServletResponse response) throws Exception{
+		CustomerLoss customerLoss =new CustomerLoss();
+		customerLoss.setId(Integer.parseInt(id));
+		customerLoss.setLossReason(lossReason);
+		customerLoss.setConfirmLossTime(new Date());
+		customerLoss.setState(1);
+		customerLossService.update(customerLoss);
+		JSONObject result  = new JSONObject();
+		result.put("success", true);
 		ResponseUtil.write(response, result);
 		return null;
 	}

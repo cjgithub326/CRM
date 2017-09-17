@@ -64,4 +64,34 @@ public interface CustomerLossDao {
 	 */
 	public int saveCustomerLoss(CustomerLoss customerLoss);
 	
+	/**
+	 * 
+	 * @MethodName: findById
+	 * @Description: 通过id查找客户流失
+	 * @author jed
+	 * @date 2017年9月17日上午10:12:46
+	 * @param @param id
+	 * @param @return    
+	 * @return CustomerLoss    返回类型
+	 * @param id
+	 * @return
+	 *
+	 */
+	public CustomerLoss findById(Integer id);
+	
+	/**
+	 * 
+	 * @MethodName: update
+	 * @Description: 修改客户流失记录
+	 * @author jed
+	 * @date 2017年9月17日上午10:13:26
+	 * @param @param customerLoss
+	 * @param @return    
+	 * @return int    返回类型
+	 * @param customerLoss
+	 * @return
+	 *
+	 */
+	public int update(CustomerLoss customerLoss);
+	
 }
