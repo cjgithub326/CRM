@@ -4,6 +4,9 @@
 package com.hik.service.impl;
 
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -28,6 +31,21 @@ public class customerServiceServiceImpl implements CustomerServiceService{
 	@Override
 	public int save(CustomerService customerService) {
 		return customerServiceDao.save(customerService);
+	}
+
+	@Override
+	public List<CustomerService> find(Map<String, Object> map) {
+		return customerServiceDao.find(map);
+	}
+
+	@Override
+	public Long getTotal(Map<String, Object> map) {
+		return customerServiceDao.getTotal(map);
+	}
+
+	@Override
+	public int update(CustomerService customerService) {
+		return customerServiceDao.update(customerService);
 	}
 
 
