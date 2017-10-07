@@ -29,8 +29,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="find" parameterType="Map" resultMap="CustomerServiceResult">
 		select * from t_customer_service
 		<where>
+			<if test="customer!=null and customer!='' ">
+				and customer like #{customer}
+			</if>
+			<if test="overview!=null and overview!='' ">
+				and overview like #{overview}
+			</if>
+			<if test="serveType!=null and serveType!='' ">
+				and serveType = #{serveType}
+			</if>
 			<if test="state!=null and state!='' ">
 				and state = #{state}
+			</if>
+			<if test="createTimefrom!=null and createTimefrom!='' ">
+				and createTime &gt;= #{createTimefrom}
+			</if>
+			<if test="createTimeto!=null and createTimeto!='' ">
+				and createTime &lt;= #{createTimeto}
 			</if>
 		</where>
 		<if test="start!=null and size!=null">
@@ -90,8 +105,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTotal" parameterType="Map" resultType="Long">
 		select count(*) from t_customer_service
 		<where>
+			<if test="customer!=null and customer!='' ">
+				and customer like #{customer}
+			</if>
+			<if test="overview!=null and overview!='' ">
+				and overview like #{overview}
+			</if>
+			<if test="serveType!=null and serveType!='' ">
+				and serveType = #{serveType}
+			</if>
 			<if test="state!=null and state!='' ">
 				and state = #{state}
+			</if>
+			<if test="createTimefrom!=null and createTimefrom!='' ">
+				and createTime &gt;= #{createTimefrom}
+			</if>
+			<if test="createTimeto!=null and createTimeto!='' ">
+				and createTime &lt;= #{createTimeto}
 			</if>
 		</where>
 	</select>

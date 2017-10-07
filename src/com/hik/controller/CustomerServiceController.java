@@ -24,6 +24,7 @@ import com.hik.entity.PageBean;
 import com.hik.service.CustomerServiceService;
 import com.hik.util.CollectionUtil;
 import com.hik.util.ResponseUtil;
+import com.hik.util.StringUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -103,10 +104,15 @@ public class CustomerServiceController {
 	 *
 	 */
 	@RequestMapping("/list")
-	public String list(@RequestParam(value="page",required=false)String page,@RequestParam(value="rows",required=false)String rows,CustomerService customerService,HttpServletResponse response) throws Exception{
+	public String list(@RequestParam(value="page",required=false)String page,@RequestParam(value="rows",required=false)String rows,String createTimefrom, String createTimeto, CustomerService customerService,HttpServletResponse response) throws Exception{
 		PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
 		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("customer", StringUtil.formatLike(customerService.getCustomer()));
+		map.put("overview", StringUtil.formatLike(customerService.getOverview()));
+		map.put("serveType",customerService.getServeType());
 		map.put("state", customerService.getState());
+		map.put("createTimefrom", createTimefrom);
+		map.put("createTimeto", createTimeto);
 		map.put("start", pageBean.getStart());
 		map.put("size", pageBean.getPageSize());
 		List<CustomerService> customerServiceList= customerServiceService.find(map);
