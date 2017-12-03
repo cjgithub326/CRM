@@ -197,4 +197,58 @@ public class UserController {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @MethodName: modifyPassword
+	 * @Description: 修改用户密码 
+	 * @author jed
+	 * @date 2017年12月3日下午10:31:13
+	 * @param @param id
+	 * @param @param newPassword
+	 * @param @param response
+	 * @param @return
+	 * @param @throws Exception    
+	 * @return String    返回类型
+	 * @param id
+	 * @param newPassword
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 *
+	 */
+	@RequestMapping("/modifyPassword")
+	public String modifyPassword(Integer id,String newPassword,HttpServletResponse response) throws Exception{
+		User user = new User();
+		user.setId(id);
+		user.setPassword(newPassword);
+		int resultTotal = userService.update(user);
+		JSONObject result = new JSONObject();
+		if(resultTotal>0){
+			result.put("success", true);
+		}else{
+			result.put("success", false);
+		}
+		ResponseUtil.write(response, result); 
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @MethodName: logout
+	 * @Description: 用户注销
+	 * @author jed
+	 * @date 2017年12月3日下午10:33:53
+	 * @param @param session
+	 * @param @return    
+	 * @return String    返回类型
+	 * @param session
+	 * @return
+	 *
+	 */
+	@RequestMapping("/logout")
+	public String logout(HttpSession session){
+		session.invalidate(); //session失效
+		return "redirect:/login.jsp";  //重定向到登录页面
+	}
+	
 }
