@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hik.entity.PageBean;
 import com.hik.entity.Customer;
+import com.hik.entity.CustomerGx;
 import com.hik.service.CustomerService;
 import com.hik.util.CollectionUtil;
 import com.hik.util.DateUtil;
@@ -163,4 +164,44 @@ public class CustomerController {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @MethodName: findCustomerGx
+	 * @Description: 查询客户分析贡献
+	 * @author jed
+	 * @date 2017年12月3日上午10:59:49
+	 * @param @param page
+	 * @param @param rows
+	 * @param @param name
+	 * @param @param response
+	 * @param @return
+	 * @param @throws Exception    
+	 * @return String    返回类型
+	 * @param page
+	 * @param rows
+	 * @param name
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 *
+	 */
+	@RequestMapping("/findCustomerGx")
+	public String findCustomerGx(@RequestParam(value="page",required=false)String page,@RequestParam(value="rows",required=false)String rows,String name,HttpServletResponse response) throws Exception{
+		PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("name", StringUtil.formatLike(name));
+		map.put("start", pageBean.getStart());
+		map.put("size", pageBean.getPageSize());
+		List<CustomerGx> customerGxList = customerService.findCustomerGx(map);
+		Long total = customerService.getTotalCustomerGx(map);
+		JSONObject result = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		if(CollectionUtil.isNotEmpty(customerGxList)){
+			jsonArray = JSONArray.fromObject(customerGxList);
+		}
+		result.put("rows", jsonArray);
+		result.put("total", total);
+		ResponseUtil.write(response, result);
+		return null;
+	}
 }

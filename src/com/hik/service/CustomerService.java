@@ -8,6 +8,7 @@ import java.util.Map;
 
 
 import com.hik.entity.Customer;
+import com.hik.entity.CustomerGx;
 
 /**
  * @ClassName: CustomerService
@@ -118,5 +119,35 @@ public interface CustomerService {
 	 *
 	 */
 	public void checkCustomerLoss();
+	
+	/**
+	 * 
+	 * @MethodName: findCustomerGx
+	 * @Description: 查询客户贡献
+	 * @author jed
+	 * @date 2017年12月3日上午10:15:49
+	 * @param @param map
+	 * @param @return    
+	 * @return List<CustomerGx>    返回类型
+	 * @param map
+	 * @return
+	 *
+	 */
+	public List<CustomerGx> findCustomerGx(Map<String, Object> map);
+	
+	/**
+	 * 
+	 * @MethodName: getTotalCustomerGx
+	 * @Description: 查询客户贡献记录数
+	 * @author jed
+	 * @date 2017年12月3日上午10:16:12
+	 * @param @param map
+	 * @param @return    
+	 * @return Long    返回类型
+	 * @param map
+	 * @return
+	 *
+	 */
+	public Long getTotalCustomerGx(Map<String, Object> map);
 
 }

@@ -14,6 +14,7 @@ import com.hik.dao.CustomerDao;
 import com.hik.dao.CustomerLossDao;
 import com.hik.dao.OrderDao;
 import com.hik.entity.Customer;
+import com.hik.entity.CustomerGx;
 import com.hik.entity.CustomerLoss;
 import com.hik.entity.Order;
 import com.hik.service.CustomerService;
@@ -88,6 +89,16 @@ public class CustomerServiceImpl implements CustomerService{
 				customerDao.update(c);
 			}
 		}
+	}
+
+	@Override
+	public List<CustomerGx> findCustomerGx(Map<String, Object> map) {
+		return customerDao.findCustomerGx(map);
+	}
+
+	@Override
+	public Long getTotalCustomerGx(Map<String, Object> map) {
+		return customerDao.getTotalCustomerGx(map);
 	}
 
 }
