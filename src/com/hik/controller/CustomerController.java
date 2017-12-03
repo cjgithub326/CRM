@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hik.entity.PageBean;
 import com.hik.entity.Customer;
+import com.hik.entity.CustomerGc;
 import com.hik.entity.CustomerGx;
 import com.hik.service.CustomerService;
 import com.hik.util.CollectionUtil;
@@ -202,6 +203,29 @@ public class CustomerController {
 		result.put("rows", jsonArray);
 		result.put("total", total);
 		ResponseUtil.write(response, result);
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @MethodName: findCustomerGc
+	 * @Description: 查询客户分析构成
+	 * @author jed
+	 * @date 2017年12月3日下午4:02:13
+	 * @param @param response
+	 * @param @return
+	 * @param @throws Exception    
+	 * @return String    返回类型
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 *
+	 */
+	@RequestMapping("/findCustomerGc")
+	public String findCustomerGc(HttpServletResponse response) throws Exception{
+		List<CustomerGc> customerGcList = customerService.findCustomerGc();
+		JSONArray jsonArray = JSONArray.fromObject(customerGcList);
+		ResponseUtil.write(response, jsonArray);
 		return null;
 	}
 }

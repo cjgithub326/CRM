@@ -34,6 +34,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="gx" column="gx"/>
 	</resultMap>
 	
+	<resultMap type="CustomerGc" id="CustomerGcResult">
+		<result property="customerLevel" column="customerLevel"/>
+		<result property="customerNum" column="customerNum"/>
+	</resultMap>
+	
 	<select id="find" parameterType="Map" resultMap="CustomerResult">
 		select * from t_customer
 		<where>
@@ -167,5 +172,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and name like #{name}
 			</if>
 		</where>
+	</select>
+	
+	<select id="findCustomerGc" resultMap="CustomerGcResult">
+		SELECT LEVEL AS customerLevel ,COUNT(LEVEL) AS customerNum FROM t_customer GROUP BY LEVEL;
 	</select>
 </mapper> 
