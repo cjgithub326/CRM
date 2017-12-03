@@ -8,6 +8,7 @@ import java.util.Map;
 
 
 import com.hik.entity.Customer;
+import com.hik.entity.CustomerFw;
 import com.hik.entity.CustomerGc;
 import com.hik.entity.CustomerGx;
 
@@ -164,4 +165,16 @@ public interface CustomerService {
 	 */
 	public List<CustomerGc> findCustomerGc();
 
+	/**
+	 * 
+	 * @MethodName: findCustomerFw
+	 * @Description: 查询客户服务分析
+	 * @author jed
+	 * @date 2017年12月3日下午3:54:06
+	 * @param @return    
+	 * @return List<CustomerGc>    返回类型
+	 * @return
+	 *
+	 */
+	public List<CustomerFw> findCustomerFw();
 }

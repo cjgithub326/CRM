@@ -39,6 +39,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="customerNum" column="customerNum"/>
 	</resultMap>
 	
+	<resultMap type="CustomerFw" id="CustomerFwResult">
+		<result property="serveType" column="serveType"/>
+		<result property="num" column="num"/>
+	</resultMap>
+	
 	<select id="find" parameterType="Map" resultMap="CustomerResult">
 		select * from t_customer
 		<where>
@@ -176,5 +181,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="findCustomerGc" resultMap="CustomerGcResult">
 		SELECT LEVEL AS customerLevel ,COUNT(LEVEL) AS customerNum FROM t_customer GROUP BY LEVEL;
+	</select>
+	<select id="findCustomerFw" resultMap="CustomerFwResult">
+		SELECT serveType , COUNT(serveType) AS num FROM t_customer_service GROUP BY serveType;
 	</select>
 </mapper> 

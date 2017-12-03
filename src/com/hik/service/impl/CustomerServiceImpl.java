@@ -14,6 +14,7 @@ import com.hik.dao.CustomerDao;
 import com.hik.dao.CustomerLossDao;
 import com.hik.dao.OrderDao;
 import com.hik.entity.Customer;
+import com.hik.entity.CustomerFw;
 import com.hik.entity.CustomerGc;
 import com.hik.entity.CustomerGx;
 import com.hik.entity.CustomerLoss;
@@ -105,6 +106,11 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public List<CustomerGc> findCustomerGc() {
 		return customerDao.findCustomerGc();
+	}
+
+	@Override
+	public List<CustomerFw> findCustomerFw() {
+		return customerDao.findCustomerFw();
 	}
 
 }

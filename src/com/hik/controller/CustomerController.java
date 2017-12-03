@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hik.entity.PageBean;
 import com.hik.entity.Customer;
+import com.hik.entity.CustomerFw;
 import com.hik.entity.CustomerGc;
 import com.hik.entity.CustomerGx;
 import com.hik.service.CustomerService;
@@ -225,6 +226,29 @@ public class CustomerController {
 	public String findCustomerGc(HttpServletResponse response) throws Exception{
 		List<CustomerGc> customerGcList = customerService.findCustomerGc();
 		JSONArray jsonArray = JSONArray.fromObject(customerGcList);
+		ResponseUtil.write(response, jsonArray);
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @MethodName: findCustomerFw
+	 * @Description: 查询客户服务分析
+	 * @author jed
+	 * @date 2017年12月3日下午4:02:13
+	 * @param @param response
+	 * @param @return
+	 * @param @throws Exception    
+	 * @return String    返回类型
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 *
+	 */
+	@RequestMapping("/findCustomerFw")
+	public String findCustomerFw(HttpServletResponse response) throws Exception{
+		List<CustomerFw> customerFwList = customerService.findCustomerFw();
+		JSONArray jsonArray = JSONArray.fromObject(customerFwList);
 		ResponseUtil.write(response, jsonArray);
 		return null;
 	}
